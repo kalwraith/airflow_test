@@ -1,7 +1,7 @@
 from airflow.models import Variable
 from airflow.models.baseoperator import BaseOperator
 from config.chatgpt import get_chatgpt_response
-from config.pykrx import get_prompt_for_chatgpt
+from config.pykrx_api import get_prompt_for_chatgpt
 from config.tistory import set_tistory_post
 import pendulum
 
@@ -9,7 +9,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
     
-    
+
     def execute(context):
         chatgpt_api_key = Variable.get('chatgpt_api_key')
         tistory_access_token = Variable.get('tistory_access_token')
