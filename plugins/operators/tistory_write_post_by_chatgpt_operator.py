@@ -14,7 +14,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         chatgpt_api_key = Variable.get('chatgpt_api_key')
         tistory_access_token = Variable.get('tistory_access_token')
 
-        now =  pendulum.now()
+        now =  pendulum.now('Asia/Seoul')
         now_yyyymmmdd = now.strftime('%Y%m%d')
         yyyy = now.year
         mm = now.month
