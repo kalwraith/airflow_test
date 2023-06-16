@@ -44,6 +44,6 @@ def get_prompt_for_chatgpt(yyyymmdd, market):
         ticker_name_lst.append(ticker_name)
         return_prompt_lst.append(report_str)
         fluctuation_rate_lst.append(fluctuation_rate)
-        if idx >= 5:
+        if idx >= 4:
             break
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst
