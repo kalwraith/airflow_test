@@ -1,5 +1,5 @@
 import requests 
-
+import json
 def get_chatgpt_response(api_key, prompt, temperature=0.7, model='gpt-3.5-turbo'):
     headers={'Content-Type': 'application/json','Authorization': f'Bearer {api_key}'}
     data={
@@ -11,7 +11,7 @@ def get_chatgpt_response(api_key, prompt, temperature=0.7, model='gpt-3.5-turbo'
     }
     print(f'headers: {headers}, json:{data}')
     rslt = requests.post(url='https://api.openai.com/v1/chat/completions', headers=headers, json=data)
-    msg = rslt.text['choices'][0]['message']['content']
+    msg = json.loads(rslt.text)['choices'][0]['message']['content']
     print(f'Response of ChatGPT: {rslt.text}')
 
     return msg
