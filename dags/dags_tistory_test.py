@@ -8,7 +8,6 @@ with DAG(
     start_date=pendulum.datetime(2023, 5, 1, tz='Asia/Seoul'),
     catchup=False,
     schedule=None,
-    dagrun_timeout=timedelta(minutes=1),
 ) as dag:
     tistory = TistoryWritePostByChatgptOperator(
         task_id='tistory',
