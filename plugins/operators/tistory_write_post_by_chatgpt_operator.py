@@ -20,16 +20,19 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         mm = now.month
         dd = now.day
         hh = now.hour
-        ticker_name_lst, prompt_of_kospi_top_5_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSPI')
+        ticker_name_lst, fluctuation_rate_lst, prompt_of_kospi_top_5_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSPI')
 
         for idx, prompt in enumerate(prompt_of_kospi_top_5_lst):
             ticker_name = ticker_name_lst[idx]
+            fluctuation_rate = fluctuation_rate_lst[idx]
+            fluctuation_rate = round(fluctuation_rate*100, 1)
             chatgpt_resp = get_chatgpt_response(api_key=chatgpt_api_key, 
                                                 prompt=prompt,
                                                 temperature=0.5)
+            chatgpt_resp = chatgpt_resp.replace('\n','<br/>')
             set_tistory_post(access_token=tistory_access_token,
                              blog_name='hjkim-sun',
-                             title=f'{yyyy}/{mm}/{dd} {hh}시 KOSPI 급등주 {ticker_name} 주목!',
+                             title=f'{yyyy}/{mm}/{dd} {hh}시 KOSPI 급등 {fluctuation_rate}% {ticker_name} 주목!',
                              content=chatgpt_resp,
                              tag_lst=['KOSPI급등','급등주',ticker_name])
             

@@ -3,6 +3,7 @@ import pandas as pd
 
 def get_prompt_for_chatgpt(yyyymmdd, market):
     ticker_name_lst = []
+    fluctuation_rate_lst = []
     return_prompt_lst = []
     ohlcv_df = stock.get_market_ohlcv(date=yyyymmdd, market=market) # (market: KOSPI/KOSDAQ/KONEX/ALL)
     ohlcv_df.reset_index(inplace=True)
@@ -42,7 +43,7 @@ def get_prompt_for_chatgpt(yyyymmdd, market):
         
         ticker_name_lst.append(ticker_name)
         return_prompt_lst.append(report_str)
-    
+        fluctuation_rate_lst.append(fluctuation_rate)
         if idx >= 5:
             break
-    return ticker_name_lst, return_prompt_lst
+    return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst
