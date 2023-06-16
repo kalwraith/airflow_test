@@ -1,7 +1,7 @@
 from airflow import DAG
 import pendulum
 from datetime import timedelta
-from operators.tistory_write_post_operator import TistoryWritePostOperator
+from operators.tistory_write_post_by_chatgpt_operator import TistoryWritePostByChatgptOperator
 
 with DAG(
     dag_id='dags_tistory_test',
@@ -10,9 +10,6 @@ with DAG(
     schedule=None,
     dagrun_timeout=timedelta(minutes=1),
 ) as dag:
-    tistory = TistoryWritePostOperator(
+    tistory = TistoryWritePostByChatgptOperator(
         task_id='tistory',
-        title='chatGPT test',
-        content='Hello chatGPT',
-        tag_lst=['chatGPT']
     )
