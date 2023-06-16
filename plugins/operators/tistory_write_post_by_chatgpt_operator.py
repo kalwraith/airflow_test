@@ -10,7 +10,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         super().__init__(**kwargs)
     
 
-    def execute(context):
+    def execute(self, context):
         chatgpt_api_key = Variable.get('chatgpt_api_key')
         tistory_access_token = Variable.get('tistory_access_token')
 
