@@ -31,6 +31,8 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         for idx, prompt in enumerate(tot_prompt):
             temperature = randrange(10,100)/100     # 0.1 ~ 1 사이 
             ticker_name = tot_ticker_name_lst[idx]
+            print(f'ticker: {ticker_name}, temperature:{temperature}')      # temperature 확인용 로깅
+
             fluctuation_rate = tot_fluctuation_rate_lst[idx]
             fluctuation_rate = round(fluctuation_rate, 1)
             chatgpt_resp = get_chatgpt_response(api_key=chatgpt_api_key, 
