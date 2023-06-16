@@ -25,7 +25,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         for idx, prompt in enumerate(prompt_of_kospi_top_5_lst):
             ticker_name = ticker_name_lst[idx]
             fluctuation_rate = fluctuation_rate_lst[idx]
-            fluctuation_rate = round(fluctuation_rate*100, 1)
+            fluctuation_rate = round(fluctuation_rate, 1)
             chatgpt_resp = get_chatgpt_response(api_key=chatgpt_api_key, 
                                                 prompt=prompt,
                                                 temperature=0.5)
