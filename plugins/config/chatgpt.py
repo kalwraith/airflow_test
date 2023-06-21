@@ -1,7 +1,7 @@
 import requests 
 import json
 def get_chatgpt_response(api_key, prompt, temperature=0.7, model='gpt-3.5-turbo'):
-    headers={'Content-Type': 'application/json','Authorization': f'Bearer {api_key}'}
+    headers={'Authorization': f'Bearer {api_key}'}
     data={
         "model": model,
         "messages": [{"role": "system", "content":"You are a reporter"},
