@@ -6,8 +6,9 @@ from config.tistory import set_tistory_post
 import pendulum
 from random import randrange
 class TistoryWritePostByChatgptOperator(BaseOperator):
-    def __init__(self, **kwargs):
+    def __init__(self, post_cnt_per_market: int, **kwargs):
         super().__init__(**kwargs)
+        self.post_cnt_per_market = post_cnt_per_market
     
 
     def execute(self, context):
@@ -20,12 +21,12 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
         mm = now.month
         dd = now.day
         hh = now.hour
-        kospi_ticker_name_lst, kospi_fluctuation_rate_lst, prompt_of_kospi_top_5_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSPI')
-        kosdaq_ticker_name_lst, kosdaq_fluctuation_rate_lst, prompt_of_kosdaq_top_5_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSDAQ')
+        kospi_ticker_name_lst, kospi_fluctuation_rate_lst, prompt_of_kospi_top_n_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSPI', cnt=self.post_cnt_per_market)
+        kosdaq_ticker_name_lst, kosdaq_fluctuation_rate_lst, prompt_of_kosdaq_top_n_lst = get_prompt_for_chatgpt(now_yyyymmmdd, market='KOSDAQ', cnt=self.post_cnt_per_market)
         
         tot_ticker_name_lst = kospi_ticker_name_lst + kosdaq_ticker_name_lst
         tot_fluctuation_rate_lst = kospi_fluctuation_rate_lst + kosdaq_fluctuation_rate_lst
-        tot_prompt = prompt_of_kospi_top_5_lst + prompt_of_kosdaq_top_5_lst
+        tot_prompt = prompt_of_kospi_top_n_lst + prompt_of_kosdaq_top_n_lst
 
         market = 'KOSPI'
         for idx, prompt in enumerate(tot_prompt):

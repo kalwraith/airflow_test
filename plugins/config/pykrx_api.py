@@ -1,7 +1,7 @@
 from pykrx import stock
 
 
-def get_prompt_for_chatgpt(yyyymmdd, market):
+def get_prompt_for_chatgpt(yyyymmdd, market, cnt):
     ticker_name_lst = []
     fluctuation_rate_lst = []
     return_prompt_lst = []
@@ -48,6 +48,6 @@ def get_prompt_for_chatgpt(yyyymmdd, market):
         return_prompt_lst.append(chatgpt_prompt)
         fluctuation_rate_lst.append(fluc_rate)
 
-        if idx >= 4:
+        if idx >= cnt-1:
             break
     return ticker_name_lst, fluctuation_rate_lst, return_prompt_lst
