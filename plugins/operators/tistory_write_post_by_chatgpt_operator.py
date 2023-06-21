@@ -41,7 +41,7 @@ class TistoryWritePostByChatgptOperator(BaseOperator):
                                                 temperature=temperature)
             chatgpt_resp = chatgpt_resp.replace('\n','<br/>')
 
-            if idx >= 5:
+            if idx >= self.post_cnt_per_market:
                 market = 'KOSDAQ'
 
             set_tistory_post(access_token=tistory_access_token,
